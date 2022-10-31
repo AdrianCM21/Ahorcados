@@ -59,7 +59,6 @@ function click_letras(event){
     const spans = document.querySelectorAll( '#palabra_a_adivinar span' );
     const button = event.target; //cuál de todas las letras, llamó a la función.
     button.disabled = true;
-    button.style.background='#D00000';
     const letra = button.innerHTML.toLowerCase( );
     const palabra = palabrita.toLowerCase( ); // .toUpperCase( )
 
@@ -77,8 +76,9 @@ function click_letras(event){
     if( acerto == false ){
         cant_errores++;
         const source = `img/img${cant_errores}.png` ;
+        button.style.background='#D00000';
         imagen.src = source;
-    }
+    }else{button.style.background='#2b9340';}
 
     if( cant_errores == 5 ){
         id('resultado').innerHTML ="Perdiste, la palabra era " + palabrita;
