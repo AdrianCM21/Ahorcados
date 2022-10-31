@@ -3,16 +3,17 @@ let cant_errores = 0; //cuantas veces me equivoqué
 let cant_aciertos = 0; //cuantas letras acerté
 
 const palabras = [
-    'manzanas',     /* 0 */
-    'Camiseta',     /* 1 */
-    'caramelos',    /* 2 */
-    'ñoquis',       /* 3 */
-    'streamer',     /* 4 */
-    'twitch',       /* 5 */
-    'murciegalo',   /* 6 */
-    'microfono'     /* 7 */
+    'programacion',   
+    'paraguay',     
+    'computadora',  
+    'visual',      
+    'algoritmos',    
+    'pasos',       
+    'secuencia',   
+    'error'     
 ];
 const btn = id('jugar');
+btn.innerHTML='Inicio';
 const imagen = id( 'imagen' );
 const btn_letras = document.querySelectorAll( "#letras button" );
 
@@ -22,6 +23,8 @@ btn.addEventListener('click', iniciar );
 function iniciar(event){
     imagen.src = 'img/img0.png';
     btn.disabled = true;
+    id('resultado').innerHTML = "";
+    btn.innerHTML=' ';
     cant_errores = 0;
     cant_aciertos = 0; 
 
@@ -37,6 +40,7 @@ function iniciar(event){
 
     for( let i = 0; i < btn_letras.length ; i++ ){
         btn_letras[ i ].disabled = false;
+        btn_letras[ i ].style.background ='#247fbb' ;
     }
 
     for( let i = 0; i < cant_letras; i++ ){
@@ -55,7 +59,7 @@ function click_letras(event){
     const spans = document.querySelectorAll( '#palabra_a_adivinar span' );
     const button = event.target; //cuál de todas las letras, llamó a la función.
     button.disabled = true;
-
+    button.style.background='#D00000';
     const letra = button.innerHTML.toLowerCase( );
     const palabra = palabrita.toLowerCase( ); // .toUpperCase( )
 
@@ -76,11 +80,13 @@ function click_letras(event){
         imagen.src = source;
     }
 
-    if( cant_errores == 7 ){
+    if( cant_errores == 5 ){
         id('resultado').innerHTML ="Perdiste, la palabra era " + palabrita;
+        btn.innerHTML='Volver a jugar';
         game_over( );
     }else if( cant_aciertos == palabrita.length ){
         id('resultado').innerHTML = "GANASTE!! WIIIIII";
+        btn.innerHTML='Volver a jugar';
         game_over( );
     }
     console.log( "la letra " + letra + " en la palabra " + palabra + " ¿existe?: " + acerto );
@@ -92,7 +98,6 @@ function game_over( ){
     for( let i = 0; i < btn_letras.length ; i++ ){
         btn_letras[ i ].disabled = true;
     }
-
     btn.disabled = false;
 }
 
